@@ -18,27 +18,25 @@ The Kinzua Heritage Festival is a family-oriented, non-profit event in Russell, 
 
 ## Quick Start: Launch in WordPress Playground
 
-### Option A — One-click (Web UI)
-1. Build / obtain `khf-theme.zip` (theme + `blueprint.json` + content).
-2. Open [WordPress Playground](https://playground.wordpress.net/).
-3. Click **"Import zip"** → select `khf-theme.zip`.
-4. The Blueprint auto-installs the theme and imports the curated content.
-
-### Option B — GitHub URL (requires public repo)
+### Option A — GitHub URL (one-click)
 ```
-https://playground.wordpress.net/?repo=dhaupin/khf-wp
+https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/dhaupin/khf-wp/main/blueprint.json
 ```
-> The GitHub repo must be **public** for Playground to fetch it.
+> Uses the Blueprint URL method for full theme + content import. Requires the repo to be **public**.
 
-### Option D — GitHub URL Import (Web UI)
+### Option B — GitHub URL Import (Web UI)
 1. Open [WordPress Playground](https://playground.wordpress.net/).
-2. In the **"Import from GitHub"** field, enter your repo URL:
-   ```
-   https://github.com/dhaupin/khf-wp
-   ```
-3. Click **"Import"**. The Blueprint auto-installs the theme and imports curated content.
+2. Click **"New"** → **"From GitHub"**.
+3. Enter `dhaupin/khf-wp` and import as **wp-content directory** with path `/`.
 
-> The GitHub repo must be **public** for Playground to fetch it directly.
+### Option C — Local Development
+```bash
+git clone https://github.com/dhaupin/khf-wp.git
+cd khf-wp
+
+# Run acceptance tests (27/27 checks)
+SKIP_DEPS=1 ./scripts/wordpress-test.sh
+```
 
 ## Theme Structure
 ```
@@ -50,6 +48,7 @@ khf-wp/
 ├── blueprint.json          # WordPress Playground launch blueprint
 ├── content/
 │   └── khf-content.xml     # Curated WXR content for import
+├── khf-theme.zip           # Theme package for Playground zip import
 ├── themes/
 │   └── khf/                # The WordPress block theme
 │       ├── style.css
