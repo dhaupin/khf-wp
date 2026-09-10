@@ -1,0 +1,20 @@
+<!-- wp:template-part {"slug":"header"} /-->
+
+<!-- wp:group {"align":"wide","layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignwide">
+	<!-- wp:query-title {"type":"archive","level":1,"style":""} /-->
+<!-- wp:query {"queryId":1,"query":{"perPage":"10","pages":1,"uniqueSlugs":"true","pendingRecords":"10","__inherited":true,"wpquery":{"postsPerPage":10,"order":"DESC","orderBy":"date"}}} -->
+	<div class="wp-block-query">
+		<!-- wp:query-posts -->
+		<!-- wp:post-template -->
+			<!-- wp:post-title /-->
+			<!-- wp:post-excerpt /-->
+		<!-- /wp:post-template -->
+		<!-- wp:query-pagination /-->
+		<!-- /wp:query-posts -->
+	</div>
+<!-- /wp:query -->
+</div>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer"} /-->

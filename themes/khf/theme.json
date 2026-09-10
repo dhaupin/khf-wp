@@ -1,0 +1,157 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "slug": "khf",
+  "title": "Kinzua Heritage",
+  "description": "Native block theme for the Kinzua Heritage Festival with Seneca Nation design elements.",
+  "settings": {
+    "appearanceTools": true,
+    "useRootPaddingAwareAlignments": true,
+    "color": {
+      "defaultDuotone": false,
+      "defaultGradients": true,
+      "defaultPalette": true,
+      "custom": true,
+      "customGradient": true,
+      "palette": [
+        { "slug": "seneca-purple", "name": "Seneca Purple (Wampum)", "color": "#7a3b9e" },
+        { "slug": "wampum-white", "name": "Wampum White", "color": "#ffffff" },
+        { "slug": "bark-brown", "name": "Bark Brown", "color": "#4a3a2a" },
+        { "slug": "forest-green", "name": "Forest Green", "color": "#2d5a33" },
+        { "slug": "sunset-gold", "name": "Sunset Gold", "color": "#d4af37" },
+        { "slug": "sky-blue", "name": "Sky Blue", "color": "#8ed1fc" },
+        { "slug": "text-dark", "name": "Text Dark", "color": "#111111" },
+        { "slug": "text-light", "name": "Text Light", "color": "#f5f5f5" }
+      ],
+      "gradients": [
+        { "slug": "wooded-glen", "name": "Wooded Glen", "gradient": "linear-gradient(160deg, #2d5a33 0%, #4a3a2a 100%)" },
+        { "slug": "wampum-sunset", "name": "Wampum Sunset", "gradient": "linear-gradient(135deg, #7a3b9e 0%, #d4af37 50%, #4a3a2a 100%)" },
+        { "slug": "seneca-warm", "name": "Seneca Warm", "gradient": "linear-gradient(135deg, #7a3b9e 0%, #4a3a2a 100%)" }
+      ]
+    },
+    "spacing": {
+      "defaultSpacingSizes": false,
+      "units": ["px", "rem", "vh", "em", "%"]
+    },
+    "layout": {
+      "contentSize": "1200px",
+      "wideSize": "1424px"
+    },
+    "typography": {
+      "defaultFontSizes": false,
+      "fluid": false,
+      "dropCap": true,
+      "fontStyle": true,
+      "textDecoration": true,
+      "textTransform": true,
+      "fontSizes": [
+        { "slug": "huge", "name": "Huge", "size": "2.75rem", "fluid": { "min": "2rem", "max": "3.5rem" } },
+        { "slug": "large", "name": "Large", "size": "1.75rem", "fluid": { "min": "1.5rem", "max": "2.25rem" } },
+        { "slug": "medium", "name": "Medium", "size": "1.375rem" },
+        { "slug": "regular", "name": "Regular", "size": "1.125rem" },
+        { "slug": "small", "name": "Small", "size": "1rem" },
+        { "slug": "tiny", "name": "Tiny", "size": "0.875rem" }
+      ],
+      "fontFamilies": [
+        { "slug": "display", "name": "Display", "fontFamily": "'Cormorant Garamond', serif" },
+        { "slug": "body", "name": "Body", "fontFamily": "'Inter', sans-serif" },
+        { "slug": "glyph", "name": "Glyph", "fontFamily": "'Source Serif Pro', serif" }
+      ]
+    }
+  },
+  "styles": {
+    "color": {
+      "background": "#ffffff",
+      "text": "#111111"
+    },
+    "typography": {
+      "fontFamily": "var(--wp--preset--font-family-body)",
+      "fontSize": "var(--wp--preset--font-size-regular)"
+    },
+    "spacing": {
+      "blockGap": "1.5rem"
+    },
+    "elements": {
+      "link": {
+        "color": { "text": "#7a3b9e" },
+        "typography": { "textDecoration": "underline" },
+        ":hover": {
+          "color": { "text": "#5a2a83" },
+          "typography": { "textDecoration": "underline" }
+        },
+        ":focus-visible": {
+          "color": { "text": "#5a2a83" },
+          "typography": { "textDecoration": "underline" }
+        }
+      },
+      "button": {
+        "color": { "background": "#5a2a83", "text": "#ffffff" },
+        "border": { "radius": "0.5rem" },
+        "spacing": { "padding": { "top": "0.75rem", "bottom": "0.75rem", "left": "1.5rem", "right": "1.5rem" } },
+        "typography": { "fontWeight": "500" },
+        ":hover": {
+          "color": { "background": "#5a2a83" }
+        }
+      },
+      "heading": {
+        "color": { "text": "#4a3a2a" },
+        "typography": { "fontFamily": "var(--wp--preset--font-family-display)" }
+      }
+    },
+    "blocks": {
+      "core/button": {
+        "color": { "background": "#5a2a83", "text": "#ffffff" },
+        "border": { "radius": "0.5rem" },
+        "spacing": { "padding": { "top": "0.75rem", "bottom": "0.75rem", "left": "1.5rem", "right": "1.5rem" } },
+        "typography": { "fontWeight": "500" }
+      },
+      "core/heading": {
+        "typography": { "fontFamily": "var(--wp--preset--font-family-display)" }
+      },
+      "core/separator": {
+        "border": { "color": "#7a3b9e", "style": "solid", "width": "0 0 3px 0" },
+        "color": { "text": "#ffffff" }
+      },
+      "core/group": {
+        "border": { "style": "solid", "width": "0", "color": "#7a3b9e" }
+      },
+      "core/navigation": {
+        "elements": {
+          "link": {
+            "color": { "text": "var:preset(color,seneca-purple)" },
+            "typography": { "textDecoration": "none" },
+            ":hover": {
+              "color": { "text": "var:preset(color,forest-green)" },
+              "typography": { "textDecoration": "underline" }
+            }
+          }
+        }
+      }
+    }
+  },
+   "templateParts": [
+    { "name": "header", "title": "Header", "area": "header" },
+    { "name": "footer", "title": "Footer", "area": "footer" },
+    { "name": "hero", "title": "Hero", "area": "uncategorized" },
+    { "name": "about", "title": "About", "area": "uncategorized" },
+    { "name": "artisans", "title": "Artisans", "area": "uncategorized" },
+    { "name": "schedule", "title": "Schedule", "area": "uncategorized" },
+    { "name": "visit", "title": "Visit", "area": "uncategorized" },
+    { "name": "vendor-cta", "title": "Vendor CTA", "area": "uncategorized" },
+    { "name": "donate-auction", "title": "Donate & Auction", "area": "uncategorized" },
+    { "name": "workshop-cta", "title": "Workshop CTA", "area": "uncategorized" },
+    { "name": "events-grid", "title": "Events Grid", "area": "uncategorized" },
+    { "name": "venue-cta", "title": "Venue CTA", "area": "uncategorized" },
+    { "name": "vendor-signup-form", "title": "Vendor Signup Form", "area": "uncategorized" },
+    { "name": "contact-form", "title": "Contact Form", "area": "uncategorized" }
+  ],
+  "customTemplates": [
+    { "name": "page-workshop", "title": "Workshop Days", "postTypes": ["page"] },
+    { "name": "page-events", "title": "Events", "postTypes": ["page"] },
+    { "name": "page-venue", "title": "Venue Rental", "postTypes": ["page"] },
+    { "name": "page-contact", "title": "Contact", "postTypes": ["page"] },
+    { "name": "page-privacy", "title": "Privacy Policy", "postTypes": ["page"] },
+    { "name": "page-terms", "title": "Terms of Use", "postTypes": ["page"] },
+    { "name": "page-vendor-signup", "title": "Vendor Signup", "postTypes": ["page"] }
+  ]
+}

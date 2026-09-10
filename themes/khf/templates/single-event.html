@@ -1,0 +1,46 @@
+<!-- wp:template-part {"slug":"header"} /-->
+
+<!-- wp:group {"align":"wide","layout":{"type":"constrained"},"className":"khf-single-event"} -->
+<div class="wp-block-group alignwide khf-single-event">
+	<!-- wp:post-title {"level":1,"align":"center"} /-->
+	<!-- wp:post-featured-image {"align":"wide"} /-->
+	<!-- wp:group {"layout":{"type":"constrained"}} -->
+	<div class="wp-block-group">
+		<!-- wp:heading {"level":2} -->
+		<h2>Event Details</h2>
+		<!-- /wp:heading -->
+		<!-- wp:post-terms {"term":"event_type"} /-->
+		<!-- wp:post-date {"format":"F j, Y","fontSize":"regular"} /-->
+		<!-- wp:separator {"className":"is-style-eagle-feather"} -->
+		<hr class="wp-block-separator is-style-eagle-feather"/>
+		<!-- /wp:separator -->
+		<!-- wp:post-content /-->
+		<!-- wp:post-terms {"term":"event_type","separator":" "} /-->
+	</div>
+	<!-- /wp:group -->
+	<!-- wp:separator {"className":"is-style-eagle-feather"} -->
+	<hr class="wp-block-separator is-style-eagle-feather"/>
+	<!-- /wp:separator -->
+	<!-- wp:query {"queryId":2,"query":{"perPage":"999","pages":1,"slug":"","exclude":[],"sticky":{"not":"all"},"inherit":false,"__inherited":true,"wpquery":{"posts_per_page":999,"order":"ASC","orderby":"date"},"author":""},"displayLayout":{"type":"list"},"layout":{"type":"constrained"}} -->
+	<div class="wp-block-query">
+		<!-- wp:post-template {"className":"khf-related-events"} -->
+			<!-- wp:post-title {"isLink":true} /-->
+			<!-- wp:post-excerpt /-->
+			<!-- wp:post-date /-->
+		<!-- /wp:post-template -->
+	</div>
+	<!-- /wp:query -->
+	<!-- wp:separator {"className":"is-style-eagle-feather"} -->
+	<hr class="wp-block-separator is-style-eagle-feather"/>
+	<!-- /wp:separator -->
+	<!-- wp:buttons {"align":"center"} -->
+	<div class="wp-block-buttons aligncenter">
+		<!-- wp:button {"className":"is-style-seneca-filled"} -->
+		<div class="wp-block-button"><a class="wp-block-button__link is-style-seneca-filled" href="/events">View All Events</a></div>
+		<!-- /wp:button -->
+	</div>
+	<!-- /wp:buttons -->
+</div>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer"} /-->

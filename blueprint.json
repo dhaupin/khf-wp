@@ -1,0 +1,59 @@
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "description": "Kinzua Heritage Festival — block theme for the Kinzua Heritage Festival (Russell, PA). Rustic heritage + Seneca Nation design. Launches the khf theme, imports curated content from WXR, and configures the site.",
+  "landingPage": "/",
+  "preferredVersions": {
+    "php": "8.3",
+    "wp": "latest"
+  },
+  "login": true,
+  "features": {
+    "networking": true
+  },
+  "siteOptions": {
+    "blogname": "Kinzua Heritage Festival",
+    "blogdescription": "Striving to keep the past alive!",
+    "timezone_string": "America/New_York",
+    "gmt_offset": "-5"
+  },
+  "steps": [
+    {
+      "step": "installTheme",
+      "themeData": {
+        "resource": "git:directory",
+        "url": "https://github.com/dhaupin/khf-wp",
+        "ref": "main",
+        "refType": "branch",
+        "path": "themes/khf"
+      },
+      "options": {
+        "activate": true,
+        "targetFolderName": "khf"
+      }
+    },
+    {
+      "step": "importWxr",
+      "file": {
+        "resource": "bundled",
+        "path": "content/khf-content.xml"
+      },
+      "fetchAttachments": false,
+      "rewriteUrls": true,
+      "importComments": false,
+      "authorsMode": "default-author",
+      "defaultAuthorUsername": "admin"
+    },
+    {
+      "step": "runPHP",
+      "code": "<?php require_once '/wordpress/wp-load.php'; flush_rewrite_rules();"
+    },
+    {
+      "step": "setSiteOptions",
+      "options": {
+        "show_on_front": "page",
+        "page_on_front": "7",
+        "posts_page": "0"
+      }
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+# Test artifacts
+khf-front.html
+khf-php-srv.pid
+khf-php-srv.log
+khf-playground.zip
+
+# WordPress test environment
+khf-wp-test/
+mariadb-data/
+mariadb-sock/
+mariadb-err.log
+mariadb-data-fresh/
+
+# Test scripts
+test_*.js
+get-pip.py
+
+# Node modules
+node_modules/
+package-lock.json
+
+# Logs
+*.log
+
+# macOS
+.DS_Store
+
+# IDE
+.idea/
+.vscode/

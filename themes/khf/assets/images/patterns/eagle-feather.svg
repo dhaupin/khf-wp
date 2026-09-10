@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 64" width="48" height="64" fill="currentColor">
+  <defs>
+    <linearGradient id="feather-shaft" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7a3b9e"/>
+      <stop offset="100%" stop-color="#1a1a1a"/>
+    </linearGradient>
+  </defs>
+  <path d="M24 2 C26 6, 28 12, 28 18 C28 23, 26 27, 24 27 C22 27, 20 23, 20 18 C20 12, 22 6, 24 2 Z" fill="url(#feather-shaft)"/>
+  <path d="M24 2 L23 5 L22 8 L20 16 L23 14 L24 16 L26 14 L25 9 L24 5 Z" fill="url(#feather-shaft)"/>
+  <path d="M22 9 L18 10 L16 14 L18 18 L20 20 L22 18 Z" fill="url(#feather-shaft)"/>
+  <path d="M26 9 L30 10 L32 14 L30 18 L28 20 L26 18 Z" fill="url(#feather-shaft)"/>
+  <path d="M24 27 L23 32 L22 40 L23 50 L25 50 L26 40 L25 32 Z" fill="url(#feather-shaft)"/>
+  <path d="M24 50 L20 54 L21 58 L24 60 L27 58 L28 54 Z" fill="url(#feather-shaft)"/>
+  <circle cx="24" cy="6" r="2" fill="#ffffff"/>
+  <circle cx="24" cy="56" r="2.5" fill="#7a3b9e"/>
+</svg>

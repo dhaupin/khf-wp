@@ -1,0 +1,57 @@
+<!-- wp:template-part {"slug":"header"} /-->
+
+<!-- wp:template-part {"slug":"hero"} /-->
+
+<!-- wp:separator {"className":"is-style-eagle-feather"} -->
+<hr class="wp-block-separator is-style-eagle-feather"/>
+<!-- /wp:separator -->
+
+<!-- wp:group {"align":"wide","layout":{"type":"constrained"},"className":"khf-archive-workshop"} -->
+<div class="wp-block-group alignwide khf-archive-workshop">
+	<!-- wp:query-title {"level":1,"align":"center"} -->
+	<h1 class="has-text-align-center">Workshops</h1>
+	<!-- /wp:query-title -->
+	<!-- wp:paragraph {"align":"center","fontSize":"regular"} -->
+	<p class="has-text-align-center has-regular-font-size">Browse all available workshop classes. $45 per person — pick 2 classes.</p>
+	<!-- /wp:paragraph -->
+	<!-- wp:separator {"className":"is-style-eagle-feather"} -->
+	<hr class="wp-block-separator is-style-eagle-feather"/>
+	<!-- /wp:separator -->
+	<!-- wp:query {"queryId":1,"query":{"perPage":"12","pages":1,"slug":"workshop","exclude":[],"sticky":{"not":"all"},"inherit":false,"__inherited":true,"wpquery":{"postsPerPage":12,"post_type":"workshop","order":"ASC","orderBy":"title"},"author":""},"displayLayout":{"type":"grid","columns":3}} -->
+	<div class="wp-block-query">
+		<!-- wp:post-template -->
+			<!-- wp:group {"layout":{"type":"constrained"},"className":"khf-workshop-card"} -->
+			<div class="wp-block-group khf-workshop-card">
+				<!-- wp:post-featured-image {"isLink":true} /-->
+				<!-- wp:post-title {"isLink":true} /-->
+				<!-- wp:post-excerpt /-->
+				<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
+				<div class="wp-block-buttons">
+				<!-- wp:button {"className":"is-style-seneca-filled"} -->
+				<div class="wp-block-button"><a class="wp-block-button__link is-style-seneca-filled" href="<?php echo esc_url( get_permalink() ); ?>">View Details</a></div>
+				<!-- /wp:button -->
+				</div>
+				<!-- /wp:buttons -->
+			</div>
+			<!-- /wp:group -->
+		<!-- /wp:post-template -->
+		<!-- wp:query-no-results -->
+			<!-- wp:paragraph {"align":"center"} -->
+			<p class="has-text-align-center">No workshops available at this time. Please check back during festival weekend for our full schedule.</p>
+			<!-- /wp:paragraph -->
+		<!-- /wp:query-no-results -->
+		<!-- wp:query-pagination -->
+			<!-- wp:query-pagination-previous /-->
+			<!-- wp:query-pagination-numbers /-->
+			<!-- wp:query-pagination-next /-->
+		<!-- /wp:query-pagination -->
+	</div>
+	<!-- /wp:query -->
+	<!-- wp:separator {"className":"is-style-eagle-feather"} -->
+	<hr class="wp-block-separator is-style-eagle-feather"/>
+	<!-- /wp:separator -->
+	<!-- wp:template-part {"slug":"workshop-cta"} /-->
+</div>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer"} /-->

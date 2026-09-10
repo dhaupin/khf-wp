@@ -1,0 +1,77 @@
+<!-- wp:template-part {"slug":"header"} /-->
+
+<!-- wp:group {"align":"wide","layout":{"type":"constrained"},"className":"khf-single-workshop"} -->
+<div class="wp-block-group alignwide khf-single-workshop">
+	<!-- wp:post-title {"level":1,"align":"center"} /-->
+	<!-- wp:post-featured-image {"align":"wide","isLinkUnderline":false} /-->
+	<!-- wp:post-content /-->
+	<!-- wp:separator {"className":"is-style-eagle-feather"} -->
+	<hr class="wp-block-separator is-style-eagle-feather"/>
+	<!-- /wp:separator -->
+	<!-- wp:template-part {"slug":"workshop-cta"} /-->
+	<!-- wp:separator {"className":"is-style-eagle-feather"} -->
+	<hr class="wp-block-separator is-style-eagle-feather"/>
+	<!-- /wp:separator -->
+	<!-- wp:group {"align":"wide","layout":{"type":"constrained"},"className":"is-style-wooded-section"} -->
+	<div class="wp-block-group alignwide is-style-wooded-section" id="workshop-registration">
+		<!-- wp:heading {"level":2,"align":"center"} -->
+		<h2 class="has-text-align-center">Workshop Registration — $45</h2>
+		<!-- /wp:heading -->
+		<!-- wp:paragraph {"align":"center","fontSize":"regular"} -->
+		<p class="has-text-align-center has-regular-font-size">Pick 2 classes. Includes free lunch and all materials.</p>
+		<!-- /wp:paragraph -->
+		<!-- wp:html -->
+		<form class="khf-workshop-form" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+			<input type="hidden" name="cmd" value="_xclick">
+			<input type="hidden" name="business" value="<?php echo esc_attr( khf_get_paypal_email() ); ?>">
+			<input type="hidden" name="item_name" value="KHF Workshop Registration">
+			<input type="hidden" name="amount" value="45.00">
+			<input type="hidden" name="currency_code" value="USD">
+			<div class="form-row">
+				<label for="khf_name">Full Name</label>
+				<input type="text" id="khf_name" name="name" required>
+			</div>
+			<div class="form-row">
+				<label for="khf_email">Email</label>
+				<input type="email" id="khf_email" name="email" required>
+			</div>
+			<div class="form-row">
+				<label for="khf_phone">Phone</label>
+				<input type="tel" id="khf_phone" name="phone" required>
+			</div>
+			<div class="form-row">
+				<label for="khf_class1">Class 1</label>
+				<select id="khf_class1" name="class1" required>
+					<option value="">Select a class</option>
+					<option value="blacksmithing">Blacksmithing</option>
+					<option value="wire-weaving">Wire Weaving / Wrapping</option>
+					<option value="basket-making">Traditional Basket Making</option>
+					<option value="bead-work">Bead Work</option>
+					<option value="gardening">Gardening</option>
+					<option value="plants-herbs">Plants / Herbs</option>
+				</select>
+			</div>
+			<div class="form-row">
+				<label for="khf_class2">Class 2</label>
+				<select id="khf_class2" name="class2" required>
+					<option value="">Select a class</option>
+					<option value="blacksmithing">Blacksmithing</option>
+					<option value="wire-weaving">Wire Weaving / Wrapping</option>
+					<option value="basket-making">Traditional Basket Making</option>
+					<option value="bead-work">Bead Work</option>
+					<option value="gardening">Gardening</option>
+					<option value="plants-herbs">Plants / Herbs</option>
+				</select>
+			</div>
+			<div class="form-row form-row-submit">
+				<button type="submit" class="is-style-seneca-filled">Pay $45 via PayPal</button>
+			</div>
+			<p class="form-hint">Or pay $45 at the festival gate on the day of the event.</p>
+		</form>
+		<!-- /wp:html -->
+	</div>
+	<!-- /wp:group -->
+</div>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer"} /-->

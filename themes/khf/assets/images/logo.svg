@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" width="400" height="120" role="img" aria-label="Kinzua Heritage Festival logo">
+  <defs>
+    <pattern id="wampum-bead-bg" x="0" y="0" width="24" height="12" patternUnits="userSpaceOnUse">
+      <circle cx="4"  cy="4" r="3" fill="#7a3b9e"/>
+      <circle cx="12" cy="8" r="3" fill="#ffffff"/>
+      <circle cx="20" cy="4" r="3" fill="#7a3b9e"/>
+      <circle cx="4"  cy="10" r="2" fill="#ffffff"/>
+      <circle cx="20" cy="10" r="2" fill="#ffffff"/>
+    </pattern>
+  </defs>
+  <rect x="0" y="0" width="400" height="120" fill="url(#wampum-bead-bg)" fill-opacity="0.15"/>
+  <path d="M40 90 L40 30 L48 30 L48 90 Z M56 30 L56 90 L64 90 L72 90 L72 30 L64 30 Z M68 30 L68 90" fill="#4a3a2a"/>
+  <text x="200" y="75" font-family="serif" font-size="32" font-weight="bold" fill="#4a3a2a" text-anchor="middle">Kinzua Heritage</text>
+  <text x="200" y="105" font-family="serif" font-size="18" fill="#7a3b9e" text-anchor="middle">Festival</text>
+  <circle cx="180" cy="95" r="3" fill="#7a3b9e"/>
+  <circle cx="220" cy="95" r="3" fill="#7a3b9e"/>
+</svg>

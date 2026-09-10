@@ -1,0 +1,101 @@
+<!-- wp:group {"align":"wide","layout":{"type":"constrained"},"className":"khf-contact-form"} -->
+<div class="wp-block-group alignwide khf-contact-form" id="contact-form">
+	<!-- wp:separator {"className":"is-style-eagle-feather"} -->
+	<hr class="wp-block-separator is-style-eagle-feather"/>
+	<!-- /wp:separator -->
+	<!-- wp:heading {"level":2,"align":"center"} -->
+	<h2 class="has-text-align-center">Send a Message</h2>
+	<!-- /wp:heading -->
+	<?php if ( isset( $_GET['submitted'] ) && $_GET['submitted'] === 'true' ) : ?>
+		<!-- wp:paragraph {"align":"center"} -->
+		<p class="has-text-align-center">Thank you! Your message has been sent. We will respond soon.</p>
+		<!-- /wp:paragraph -->
+	<?php elseif ( isset( $_GET['error'] ) && $_GET['error'] === 'required' ) : ?>
+		<!-- wp:paragraph {"align":"center"} -->
+		<p class="has-text-align-center" style="color: var(--wp--preset--color--sunset-gold, #d4af37);">Please fill in all required fields. Please go back and try again.</p>
+		<!-- /wp:paragraph -->
+	<?php elseif ( isset( $_GET['error'] ) && $_GET['error'] === 'security' ) : ?>
+		<!-- wp:paragraph {"align":"center"} -->
+		<p class="has-text-align-center" style="color: var(--wp--preset--color--sunset-gold, #d4af37);">Security check failed. Please go back and try again.</p>
+		<!-- /wp:paragraph -->
+	<?php else : ?>
+		<!-- wp:form {"className":"khf-contact-form"} -->
+		<form class="khf-contact-form" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
+			<?php wp_nonce_field( 'khf_contact_form' ); ?>
+			<input type="hidden" name="action" value="khf_contact">
+			<!-- wp:group {"layout":{"type":"constrained"}} -->
+			<div class="wp-block-group">
+				<!-- wp:columns -->
+				<div class="wp-block-columns">
+					<!-- wp:column -->
+					<div class="wp-block-column">
+						<!-- wp:paragraph -->
+						<p><strong>Name</strong></p>
+						<!-- /wp:paragraph -->
+						<!-- wp:input {"type":"text","name":"khf_name","required":true} /-->
+					</div>
+					<!-- /wp:column -->
+					<!-- wp:column -->
+					<div class="wp-block-column">
+						<!-- wp:paragraph -->
+						<p><strong>Email</strong></p>
+						<!-- /wp:paragraph -->
+						<!-- wp:input {"type":"email","name":"khf_email","required":true} /-->
+					</div>
+					<!-- /wp:column -->
+				</div>
+				<!-- /wp:columns -->
+				<!-- wp:spacer {"height":"1rem"} -->
+				<div style="height:1rem" aria-hidden="true"></div>
+				<!-- /wp:spacer -->
+				<!-- wp:paragraph -->
+				<p><strong>Subject</strong></p>
+				<!-- /wp:paragraph -->
+				<!-- wp:input {"type":"text","name":"khf_subject","required":true} /-->
+				<!-- wp:spacer {"height":"1rem"} -->
+				<div style="height:1rem" aria-hidden="true"></div>
+				<!-- /wp:spacer -->
+				<!-- wp:columns -->
+				<div class="wp-block-columns">
+					<!-- wp:column -->
+					<div class="wp-block-column">
+						<!-- wp:paragraph -->
+						<p><strong>Phone</strong> <span class="has-small-font-size">(optional)</span></p>
+						<!-- /wp:paragraph -->
+						<!-- wp:input {"type":"tel","name":"khf_phone"} /-->
+					</div>
+					<!-- /wp:column -->
+					<!-- wp:column -->
+					<div class="wp-block-column">
+						<!-- wp:paragraph -->
+						<p><strong>Inquiry Type</strong></p>
+						<!-- /wp:paragraph -->
+						<!-- wp:radio {"name":"khf_inquiry_type","options":["General Inquiry","Workshop Registration","Vendor Booking","Venue Rental","Other"]} /-->
+					</div>
+					<!-- /wp:column -->
+				</div>
+				<!-- /wp:columns -->
+				<!-- wp:spacer {"height":"1rem"} -->
+				<div style="height:1rem" aria-hidden="true"></div>
+				<!-- /wp:spacer -->
+				<!-- wp:paragraph -->
+				<p><strong>Message</strong></p>
+				<!-- /wp:paragraph -->
+				<!-- wp:textarea {"name":"khf_message","required":true,"placeholder":"Enter your message..."} /-->
+				<!-- wp:spacer {"height":"1.5rem"} -->
+				<div style="height:1.5rem" aria-hidden="true"></div>
+				<!-- /wp:spacer -->
+				<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
+				<div class="wp-block-buttons">
+					<!-- wp:button {"className":"is-style-seneca-filled"} -->
+					<div class="wp-block-button"><button class="wp-block-button__link is-style-seneca-filled" type="submit">Send Message</button></div>
+					<!-- /wp:button -->
+				</div>
+				<!-- /wp:buttons -->
+			</div>
+			<!-- /wp:group -->
+		</form>
+		<!-- /wp:form -->
+	<?php endif; ?>
+</div>
+<!-- /wp:group -->

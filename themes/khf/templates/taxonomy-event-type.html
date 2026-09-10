@@ -1,0 +1,29 @@
+<!-- wp:template-part {"slug":"header"} /-->
+
+<!-- wp:group {"align":"wide","layout":{"type":"constrained"},"className":"khf-taxonomy"} -->
+<div class="wp-block-group alignwide khf-taxonomy">
+	<!-- wp:term-title {"level":1,"align":"center"} /-->
+	<!-- wp:term-description {"align":"center"} /-->
+	<!-- wp:query {"queryId":1,"query":{"perPage":"10","pages":1,"slug":"","exclude":[],"sticky":{"not":"all"},"inherit":false,"__inherited":true,"wpquery":{"postsPerPage":10,"order":"DESC","orderBy":"date"},"author":""},"displayLayout":{"type":"list"}} -->
+	<div class="wp-block-query">
+		<!-- wp:post-template -->
+			<!-- wp:post-title {"isLink":true} /-->
+			<!-- wp:post-excerpt /-->
+			<!-- wp:post-terms {"term":"workshop_category","separator":" "} /-->
+		<!-- /wp:post-template -->
+		<!-- wp:query-no-results -->
+			<!-- wp:paragraph {"align":"center"} -->
+			<p class="has-text-align-center">No events found in this category. Please check back soon.</p>
+			<!-- /wp:paragraph -->
+		<!-- /wp:query-no-results -->
+		<!-- wp:query-pagination -->
+			<!-- wp:query-pagination-previous /-->
+			<!-- wp:query-pagination-numbers /-->
+			<!-- wp:query-pagination-next /-->
+		<!-- /wp:query-pagination -->
+	</div>
+	<!-- /wp:query -->
+</div>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer"} /-->
