@@ -20,8 +20,11 @@
     {
       "step": "installTheme",
       "themeData": {
-        "resource": "bundled",
-        "path": "/khf-theme.zip"
+        "resource": "git:directory",
+        "url": "https://github.com/dhaupin/khf-wp",
+        "ref": "main",
+        "refType": "branch",
+        "path": "themes/khf"
       },
       "options": {
         "activate": true,
