@@ -20,11 +20,8 @@
     {
       "step": "installTheme",
       "themeData": {
-        "resource": "git:directory",
-        "url": "https://github.com/dhaupin/khf-wp",
-        "ref": "main",
-        "refType": "branch",
-        "path": "themes/khf"
+        "resource": "bundled",
+        "path": "/khf-theme.zip"
       },
       "options": {
         "activate": true,
@@ -35,7 +32,7 @@
       "step": "importWxr",
       "file": {
         "resource": "bundled",
-        "path": "content/khf-content.xml"
+        "path": "/content/khf-content.xml"
       },
       "fetchAttachments": false,
       "rewriteUrls": true,
