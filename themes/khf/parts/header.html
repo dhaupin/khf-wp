@@ -24,7 +24,19 @@
 			<!-- wp:site-title {"level":1} /-->
 			<!-- wp:site-description /-->
 		</div>
-		<!-- wp:navigation {"layout":{"type":"flex","justifyContent":"flex-end"},"className":"khf-desktop-nav","style":{"spacing":{"margin":{"top":"0px","bottom":"0px"}}}} /-->
+		<!-- wp:group {"tagName":"nav","className":"khf-navigation-wrapper","style":{"spacing":{"margin":{"top":"0px","bottom":"0px"}}}} -->
+		<nav class="wp-block-group khf-navigation-wrapper">
+			<button class="wp-block-navigation__responsive-toggle" aria-expanded="false" aria-label="Toggle navigation menu" aria-controls="khf-navigation-menu">
+				<span class="wp-block-navigation__responsive-toggle-icon" aria-hidden="true"></span>
+				<span class="wp-block-navigation__responsive-toggle-label">Menu</span>
+			</button>
+			<div class="wp-block-navigation__responsive-container" id="khf-navigation-menu">
+				<div class="wp-block-navigation__responsive-container-content">
+					<!-- wp:navigation {"layout":{"type":"flex","justifyContent":"flex-end"},"className":"khf-desktop-nav"} /-->
+				</div>
+			</div>
+		</nav>
+		<!-- /wp:group -->
 	</div>
 </div>
 <!-- /wp:group -->
