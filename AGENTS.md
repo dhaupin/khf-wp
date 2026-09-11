@@ -86,11 +86,50 @@ themes/khf/
 5. **Verify:** Check file structure, test in Playground if possible.
 
 ## When Using Subagents
-The user explicitly suggested using subagents to preserve context. When delegating:
-- Provide **detailed, self-contained prompts**.
-- Instruct agents to return a **single concise summary message** with results.
-- Specify the exact files to create/modify and the verification steps.
-- Scope agents to ONE phase (e.g., "create the theme.json design tokens" not "build the whole theme").
+
+The user explicitly suggested using subagents to preserve context. When delegating work to subagents, follow the guidance below.
+
+### When to Use Subagents
+
+Delegate complex, multi-step, or file-intensive tasks that would consume too much context if handled in the main session. Examples:
+
+- **Quality control of large files** — e.g., validating that every `themes/khf/templates/*.html` file has well-formed `<!-- wp:... -->` block markup with matching open/close tags.
+- **Gap analysis** — e.g., cross-referencing `PRD.md` requirements against the current file tree to surface missing templates, parts, or CPT registrations.
+- **Content creation** — e.g., drafting schema.org JSON-LD snippets, OpenGraph meta tags, or SVG pattern compositions.
+- **Schema validation** — e.g., checking `theme.json` against the FSE specification, or verifying `blueprint.json` structure.
+- **Bulk refactors or renames** across many files where the main session would otherwise accumulate a large diff.
+
+### How to Write Effective Subagent Prompts
+
+- **Be specific about file paths and expected outputs.** Tell the subagent exactly which files to read, create, or modify, and what the final deliverable should look like.
+- **Include success criteria / acceptance criteria.** Define what "done" means so the subagent can self-verify before returning.
+- **Provide project context.** Briefly explain that this is a WordPress block theme (FSE) for the Kinzua Heritage Festival, with Seneca-inspired design elements (purple wampum `#7a3b9e`, original geometric SVG patterns). Mention relevant conventions from the Coding Standards section above (e.g., self-hosted fonts, vanilla JS, no PHP `echo` in template parts).
+- **Ask for concise summaries, not verbose reports.** Instruct the subagent to return a single short message summarizing what was done, what files were changed, and any issues or decisions needed. Do not ask for a full transcript or detailed log.
+
+### Best Practices
+
+- **Launch multiple subagents in parallel** when tasks are independent (e.g., one validates template markup while another checks `theme.json` tokens). This speeds up the work and keeps the main session free.
+- **Keep each subagent focused on ONE phase or area.** Scope them to a single deliverable (e.g., "create the `theme.json` design tokens" or "build the `events-grid` template part"), not "build the whole theme."
+- **Instruct subagents to return a single concise summary message.** The subagent should not engage in back-and-forth; it should do the work, verify against the acceptance criteria, and report back in one message.
+- **Preserve main session context by offloading work.** The main session should only receive the summary, not the full file contents or intermediate reasoning. If a subagent surfaces a blocker, the main session can then decide how to handle it.
+
+### Example Prompts
+
+```
+"Inspect themes/khf/templates/ and verify all templates use valid block markup. Report any <!-- wp: --> without closing tags. Return a concise list of any violations found."
+```
+
+```
+"Read PRD.md and themes/khf/theme.json, then identify all missing design tokens (colors, fonts, spacing) needed to implement the Seneca heritage visual system. Output the additions you would make to theme.json as a single code block."
+```
+
+```
+"Create an original SVG geometric pattern inspired by Haudenosaunee design for themes/khf/assets/images/patterns/wampum-border.svg. Use purple (#7a3b9e) and white only. Do NOT copy existing sacred wampum belt designs. Return the file path and a one-sentence description of the composition."
+```
+
+```
+"Verify that themes/khf/functions.php registers the CPTs `workshop` and `event` and the taxonomies `workshop_category` and `event_type`. Report any missing registrations or incorrect taxonomy settings."
+```
 
 ## Commit Hygiene
 - Write concise commit messages matching the repo style.
