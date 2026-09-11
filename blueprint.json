@@ -49,7 +49,7 @@
     },
     {
       "step": "runPHP",
-      "code": "<?php require_once '/wordpress/wp-load.php'; flush_rewrite_rules();"
+      "code": "<?php require_once '/wordpress/wp-load.php'; $menu = get_term_by('slug', 'primary-menu', 'nav_menu'); if ($menu && !is_wp_error($menu)) { set_theme_mod('nav_menu_locations', array('primary' => $menu->term_id)); } flush_rewrite_rules();"
     },
     {
       "step": "setSiteOptions",

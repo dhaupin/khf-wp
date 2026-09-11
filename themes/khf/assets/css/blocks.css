@@ -70,7 +70,6 @@
   color: var(--wp--preset--color--text-dark, #1a1a1a);
   background-color: var(--wp--preset--color--background, #ffffff);
   line-height: 1.7;
-  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
 }

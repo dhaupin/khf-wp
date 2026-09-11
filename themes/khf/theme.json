@@ -187,9 +187,13 @@
    "fontSize": "var(--wp--preset--font-size-regular)",
    "lineHeight": "1.7"
   },
-  "spacing": {
-   "blockGap": "var(--wp--preset--spacing-md)"
-  },
+   "spacing": {
+    "blockGap": "var(--wp--preset--spacing-md)",
+    "padding": {
+     "left": "var(--wp--preset--spacing-md)",
+     "right": "var(--wp--preset--spacing-md)"
+    }
+   },
   "elements": {
    "link": {
     "color": {
