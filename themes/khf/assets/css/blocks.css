@@ -72,6 +72,8 @@
   line-height: 1.7;
   margin-left: auto;
   margin-right: auto;
+  padding-left: var(--wp--preset--spacing-md, 1.5rem);
+  padding-right: var(--wp--preset--spacing-md, 1.5rem);
 }
 
 .wp-site-blocks h1,

@@ -68,53 +68,57 @@
     }
    ]
   },
-  "spacing": {
-   "defaultSpacingSizes": false,
-   "units": [
-    "px",
-    "rem",
-    "vh",
-    "em",
-    "%"
-   ],
-   "spacingSizes": [
-    {
-     "slug": "xxs",
-     "name": "Extra Extra Small",
-     "size": "0.25rem"
+"spacing": {
+    "defaultSpacingSizes": false,
+    "units": [
+     "px",
+     "rem",
+     "vh",
+     "em",
+     "%"
+    ],
+    "padding": {
+     "left": "var(--wp--preset--spacing-md)",
+     "right": "var(--wp--preset--spacing-md)"
     },
-    {
-     "slug": "xs",
-     "name": "Extra Small",
-     "size": "0.5rem"
-    },
-    {
-     "slug": "sm",
-     "name": "Small",
-     "size": "1rem"
-    },
-    {
-     "slug": "md",
-     "name": "Medium",
-     "size": "1.5rem"
-    },
-    {
-     "slug": "lg",
-     "name": "Large",
-     "size": "2.5rem"
-    },
-    {
-     "slug": "xl",
-     "name": "Extra Large",
-     "size": "4rem"
-    },
-    {
-     "slug": "xxl",
-     "name": "Extra Extra Large",
-     "size": "6rem"
-    }
-   ]
-  },
+    "spacingSizes": [
+     {
+      "slug": "xxs",
+      "name": "Extra Extra Small",
+      "size": "0.25rem"
+     },
+     {
+      "slug": "xs",
+      "name": "Extra Small",
+      "size": "0.5rem"
+     },
+     {
+      "slug": "sm",
+      "name": "Small",
+      "size": "1rem"
+     },
+     {
+      "slug": "md",
+      "name": "Medium",
+      "size": "1.5rem"
+     },
+     {
+      "slug": "lg",
+      "name": "Large",
+      "size": "2.5rem"
+     },
+     {
+      "slug": "xl",
+      "name": "Extra Large",
+      "size": "4rem"
+     },
+     {
+      "slug": "xxl",
+      "name": "Extra Extra Large",
+      "size": "6rem"
+     }
+    ]
+   },
   "layout": {
    "contentSize": "1200px",
    "wideSize": "1424px"
@@ -182,17 +186,13 @@
    "background": "#ffffff",
    "text": "#111111"
   },
-  "typography": {
-   "fontFamily": "var(--wp--preset--font-family-body)",
-   "fontSize": "var(--wp--preset--font-size-regular)",
-   "lineHeight": "1.7"
-  },
+"typography": {
+    "fontFamily": "var(--wp--preset--font-family-body)",
+    "fontSize": "var(--wp--preset--font-size-regular)",
+    "lineHeight": "1.7"
+   },
    "spacing": {
-    "blockGap": "var(--wp--preset--spacing-md)",
-    "padding": {
-     "left": "var(--wp--preset--spacing-md)",
-     "right": "var(--wp--preset--spacing-md)"
-    }
+    "blockGap": "var(--wp--preset--spacing-md)"
    },
   "elements": {
    "link": {
