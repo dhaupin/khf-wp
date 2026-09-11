@@ -114,6 +114,8 @@ themes/khf/
 4. **Update tasks:** Mark completed tasks in `TASKS.md` using `todowrite`.
 5. **Verify:** Check file structure, test in Playground if possible.
 
+> **Session tracking:** `TASKS.md` is the hot document for cross-session state. If session context is lost, re-sync priorities by reading `TASKS.md` first — it reflects the latest known state. Preserve valid focal items before resetting task lists.
+
 ## When Using Subagents
 
 The user explicitly suggested using subagents to preserve context. When delegating work to subagents, follow the guidance below.
