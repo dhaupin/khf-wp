@@ -62,9 +62,9 @@ khf-wp/
 │           ├── css/
 │           ├── js/
 │           └── images/
-└── scripts/
-    └── wordpress-test.sh   # Acceptance test suite
-└── sitemap.xml             # Static sitemap
+├── scripts/
+│   └── wordpress-test.sh   # Acceptance test suite
+├── sitemap.xml             # Static sitemap
 └── robots.txt              # Static robots.txt
 ```
 

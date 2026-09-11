@@ -26,7 +26,7 @@ Build a native WordPress **block theme** (Full Site Editing) for the **Kinzua He
 - **`style.css`**: Theme headers only (no global CSS). Use `theme.json` and `assets/css/blocks.css` for styles.
 - **`functions.php`**: Enqueue scripts/styles, register block patterns/styles, add theme supports. Register CPTs (`workshop`, `event`) and taxonomies (`workshop_category`, `event_type`) here. Output schema.org / OpenGraph meta via `wp_head`.
 - **Forms & payments** (workshop $45 checkout, vendor signup+payment): prefer lightweight, well-supported plugins (e.g., WP Simple Pay, Form block, WPForms free tier) over bespoke code. The theme must not hard-depend on any paid plugin for base functionality.
-- **No PHP `echo`/`print`** in template parts — use block markup / HTML comments.
+- Template parts should use block markup / HTML comments for static content. Form-handling template parts may contain PHP for dynamic behavior (e.g., `admin-post.php` forms, nonce fields, conditional success/error messages).
 - Block templates must have valid `<!-- wp:...` block comments.
 - **Footer credit** must read "Made with ♥ by Creadev.org" with a link to https://creadev.org.
 
@@ -37,18 +37,47 @@ themes/khf/
 ├── functions.php        # Theme setup, enqueues, registrations
 ├── theme.json           # Design tokens (colors, fonts, spacing, block defaults)
 ├── screenshot.png       # 580x460px theme screenshot
-├── blueprint.json       # WP Playground blueprint (lives at repo root)
-├── templates/           # Block templates: index, front-page, page, single
-│                         # Also: single-workshop, taxonomy-event-type, page-venue, etc.
-├── parts/               # Template parts: header, footer, hero, about, vendors,
-│                       # workshop-cta, events-grid, venue-cta, vendor-cta, donate-auction, etc.
+├── templates/           # Block templates
+│   ├── index.html       # Fallback
+│   ├── front-page.html  # Hero + homepage sections
+│   ├── page.html        # Standard page
+│   ├── single.html      # Single post fallback
+│   ├── archive.html     # Archive fallback
+│   ├── single-workshop.html  # Workshop registration page
+│   ├── single-event.html     # Event detail page
+│   ├── archive-workshop.html # Workshop archive
+│   ├── taxonomy-event-type.html # Event type archive
+│   ├── page-workshop.html    # Workshop listing page
+│   ├── page-events.html      # Events listing page
+│   ├── page-venue.html       # Venue rental page
+│   ├── page-vendor-signup.html # Vendor signup page
+│   ├── page-contact.html     # Contact page
+│   ├── page-privacy.html     # Privacy policy
+│   └── page-terms.html       # Terms of use
+├── parts/               # Template parts
+│   ├── header.html      # Logo + nav
+│   ├── footer.html      # Contact, social, copyright (Creadev.org)
+│   ├── hero.html        # Festival dates + CTA
+│   ├── about.html       # Mission
+│   ├── artisans.html    # ARTS, MUSIC & MORE
+│   ├── schedule.html    # Stages, hourly shows, auction
+│   ├── visit.html       # Location, map, contact, admission
+│   ├── vendor-cta.html  # Vendor app PDF + signup CTA
+│   ├── vendor-signup-form.html # Vendor application form with PHP handler
+│   ├── workshop-cta.html    # Workshop signup + $45 payment
+│   ├── donate-auction.html  # Charity auction beneficiary
+│   ├── events-grid.html     # Events listing
+│   ├── venue-cta.html       # Grounds rental inquiry
+│   └── contact-form.html    # General inquiry form with PHP handler
 └── assets/
-    ├── fonts/           # SELF-HOSTED fonts only (Cormorant Garamond, Inter)
+    ├── fonts/           # SELF-HOSTED fonts only (Cormorant Garamond, Inter, Source Serif Pro)
     ├── css/
     │   ├── editor.css   # Editor-only styles
-    │   └── blocks.css   # Custom block style CSS
+    │   └── blocks.css   # Custom block style CSS + @font-face
     ├── images/
     │   ├── logo.svg
+    │   ├── hero-placeholder.jpg
+    │   ├── vendor-application.pdf
     │   └── patterns/    # Seneca-inspired SVG patterns / glyphs
     └── js/
         └── mobile-menu.js
@@ -103,7 +132,7 @@ Delegate complex, multi-step, or file-intensive tasks that would consume too muc
 
 - **Be specific about file paths and expected outputs.** Tell the subagent exactly which files to read, create, or modify, and what the final deliverable should look like.
 - **Include success criteria / acceptance criteria.** Define what "done" means so the subagent can self-verify before returning.
-- **Provide project context.** Briefly explain that this is a WordPress block theme (FSE) for the Kinzua Heritage Festival, with Seneca-inspired design elements (purple wampum `#7a3b9e`, original geometric SVG patterns). Mention relevant conventions from the Coding Standards section above (e.g., self-hosted fonts, vanilla JS, no PHP `echo` in template parts).
+- **Provide project context.** Briefly explain that this is a WordPress block theme (FSE) for the Kinzua Heritage Festival, with Seneca-inspired design elements (purple wampum `#7a3b9e`, original geometric SVG patterns). Mention relevant conventions from the Coding Standards section above (e.g., self-hosted fonts, vanilla JS, block markup for static template parts with PHP allowed only in form-handling parts).
 - **Ask for concise summaries, not verbose reports.** Instruct the subagent to return a single short message summarizing what was done, what files were changed, and any issues or decisions needed. Do not ask for a full transcript or detailed log.
 
 ### Best Practices
