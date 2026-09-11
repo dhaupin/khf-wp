@@ -372,7 +372,8 @@ WordPress Playground allows bundling a **Blueprint** (`blueprint.json`) alongsid
 ```json
 {
   "$schema": "https://playground.wordpress.net/blueprint-schema.json",
-  "landingPage": "/wp-admin/post.php?post=6&action=edit",
+  "description": "Kinzua Heritage Festival — block theme for the Kinzua Heritage Festival (Russell, PA). Rustic heritage + Seneca Nation design.",
+  "landingPage": "/",
   "preferredVersions": {
     "php": "8.3",
     "wp": "latest"
@@ -381,45 +382,60 @@ WordPress Playground allows bundling a **Blueprint** (`blueprint.json`) alongsid
   "features": {
     "networking": true
   },
+  "siteOptions": {
+    "blogname": "Kinzua Heritage Festival",
+    "blogdescription": "Striving to keep the past alive!",
+    "timezone_string": "America/New_York",
+    "gmt_offset": "-5"
+  },
   "steps": [
     {
-      "step": "setSiteOptions",
+      "step": "runWpInstallationWizard",
       "options": {
-        "blogname": "Kinzua Heritage Festival",
-        "blogdescription": "Striving to keep the past alive!",
-        "timezone": "America/New_York"
+        "adminUsername": "admin",
+        "adminPassword": "password"
       }
     },
     {
-      "step": "installActivateTheme",
-      "themeZipFile": {
+      "step": "installTheme",
+      "themeData": {
         "resource": "bundled",
-        "path": "/../khf-theme.zip"
+        "path": "khf-theme.zip"
+      },
+      "options": {
+        "activate": true,
+        "targetFolderName": "khf"
       }
     },
     {
       "step": "importWxr",
       "file": {
         "resource": "bundled",
-        "path": "/content/khf-content.xml"
+        "path": "content/khf-content.xml"
       },
-      "fetchAttachments": true,
+      "fetchAttachments": false,
       "rewriteUrls": true,
       "importComments": false,
       "authorsMode": "default-author",
       "defaultAuthorUsername": "admin"
     },
     {
+      "step": "runPHP",
+      "code": "<?php require_once '/wordpress/wp-load.php'; flush_rewrite_rules();"
+    },
+    {
       "step": "setSiteOptions",
       "options": {
         "show_on_front": "page",
-        "page_on_front": 6,
-        "posts_page": 0
+        "page_on_front": "7",
+        "posts_page": "0"
       }
     }
   ]
 }
 ```
+
+> **Note:** The `runWpInstallationWizard` step is critical — it initializes the WordPress database tables before the WXR import runs. Without it, the import silently fails because `wp_options` table does not exist yet. The `runPHP` step must include `require_once '/wordpress/wp-load.php'` to load the WordPress environment before calling `flush_rewrite_rules()`.
 
 ### 8.3 Content Preparation Steps
 1. **Draft curated WXR** (`content/khf-content.xml`) containing:
@@ -433,7 +449,7 @@ WordPress Playground allows bundling a **Blueprint** (`blueprint.json`) alongsid
 ### 8.4 Hosting the Playground Demo
 Once ready, the theme+blueprint can be loaded via:
 - **Playground web UI:** drag `khf-theme.zip` + `blueprint.json` into a new Playground
-- **URL params:** `https://playground.wordpress.net/?theme=khf&blueprint=<URL_TO_blueprint.json>`
+- **URL params:** `https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/dhaupin/khf-wp/main/blueprint.json`
 - A static landing page with a "Launch in Playground" button
 
 ---
@@ -509,6 +525,123 @@ Both spot types use the **same reservation system** (interactive map + spot sele
 - Spots are stored as a custom post type (`spot`) with `spot_type` taxonomy (camper, vendor), location coordinates, photo, description, price, and availability metadata.
 - The interactive map frontend is vanilla JS, enqueued via `functions.php`.
 
+## 10. Admin Management Specification
+
+### 10.1 Workshop Classes Management
+
+**CPT:** `workshop` (registered in `functions.php`)
+
+**Taxonomy:** `workshop_category` — hierarchical, e.g. "Woodworking", "Textiles", "Blacksmithing"
+
+**Admin List Columns** (`functions.php` → `manage_workshop_posts_columns`):
+- Title
+- Category (taxonomy)
+- Date (`_khf_workshop_date`)
+- Time (`_khf_workshop_time`)
+- Slots (`_khf_workshop_slots` / `_khf_workshop_slots_filled`)
+- Price (`_khf_workshop_price`)
+- Instructor (`_khf_workshop_instructor`)
+- Status (Open / Full / Completed)
+
+**Meta Box Fields** (rendered on edit screen):
+| Field | Meta Key | Type | Notes |
+|---|---|---|---|
+| Date | `_khf_workshop_date` | Date picker | YYYY-MM-DD |
+| Start Time | `_khf_workshop_time` | Time picker | HH:MM |
+| Duration | `_khf_workshop_duration` | Text | e.g. "2 hours" |
+| Max Slots | `_khf_workshop_slots` | Number | Integer |
+| Filled Slots | `_khf_workshop_slots_filled` | Number | Computed/auto |
+| Price | `_khf_workshop_price` | Number | USD |
+| Instructor | `_khf_workshop_instructor` | Text | Instructor name |
+| Description | `_khf_workshop_description` | Textarea | Short blurb |
+
+**Admin Workflow:**
+1. Create new Workshop post
+2. Fill meta box fields (date, time, slots, price, instructor)
+3. Assign to `workshop_category`
+4. Publish
+5. View slot counter in list view; manually adjust `_khf_workshop_slots_filled` if needed
+
+**Slot Enforcement Logic** (Phase 1 — theme-bundled form handler):
+- When processing workshop registration: check `_khf_workshop_slots` vs `_khf_workshop_slots_filled`
+- If filled >= max, disable registration button and show "Class Full"
+- Increment `_khf_workshop_slots_filled` on successful payment
+- This is a simple counter approach suitable for Playground (no Stripe integration needed for basic testing)
+
+### 10.2 Events Management
+
+**CPT:** `event` (registered in `functions.php`)
+
+**Taxonomy:** `event_type` — non-hierarchical, e.g. "Festival Days" (Aug 21–23), "Workshop Days" (other dates), "Venue Rental", "Special"
+
+**Admin List Columns:**
+- Title
+- Event Type (taxonomy)
+- Start Date (`_khf_event_start`)
+- End Date (`_khf_event_end`)
+- Venue (`_khf_event_venue`)
+- Featured (checkbox)
+
+**Meta Box Fields:**
+| Field | Meta Key | Type | Notes |
+|---|---|---|---|
+| Start Date/Time | `_khf_event_start` | Datetime | WordPress format YYYY-MM-DD HH:MM |
+| End Date/Time | `_khf_event_end` | Datetime | |
+| All Day? | `_khf_event_all_day` | Checkbox | Boolean |
+| Venue | `_khf_event_venue` | Text | e.g. "Main Stage", "Wooded Glen" |
+| Location | `_khf_event_location` | Text | e.g. "4047 Fox Hill Road, Russell, PA" |
+| Featured Image | (post thumbnail) | Image | |
+| Registration URL | `_khf_event_register_url` | URL | External link if applicable |
+
+**Schema Output:** `schema.org/Event` JSON-LD emitted via `wp_head` on single-event and events listing pages (see §5 acceptance criteria).
+
+### 10.3 Venue / Reservation Spots Management
+
+**CPT:** `spot` (Phase 2; not yet registered in Phase 1)
+
+**Taxonomy:** `spot_type` — non-hierarchical: "camper" (outside festival), "vendor" (inside festival)
+
+**Admin List Columns:**
+- Title (spot identifier, e.g. "A-01")
+- Type (spot_type taxonomy)
+- Coordinates (lat/lng)
+- Price (`_khf_spot_price`)
+- Available (`_khf_spot_available`)
+- Reservations (count link)
+
+**Meta Box Fields:**
+| Field | Meta Key | Type | Notes |
+|---|---|---|---|
+| Latitude | `_khf_spot_lat` | Number | Map coordinate |
+| Longitude | `_khf_spot_lng` | Number | Map coordinate |
+| Spot Type | (taxonomy) | Term | Camper / Vendor |
+| Price | `_khf_spot_price` | Number | USD |
+| Size | `_khf_spot_size` | Text | e.g. "12x12 ft" |
+| Amenities | `_khf_spot_amenities` | Text | e.g. "Electric, water" |
+| Description | `_khf_spot_description` | Textarea | Full description |
+| Photo | `_khf_spot_photo` | Image | Featured image |
+| Availability Start | `_khf_spot_avail_start` | Date | YYYY-MM-DD |
+| Availability End | `_khf_spot_avail_end` | Date | YYYY-MM-DD |
+| Available | `_khf_spot_available` | Checkbox | Toggle for reservation |
+
+**Admin Map Interface (Phase 2):**
+- Custom meta box with Leaflet.js map
+- Shows all spots as draggable markers
+- Clicking a marker opens spot info popup
+- Map used for visual spot placement on festival grounds
+
+### 10.4 Admin Capabilities & Roles
+
+| Capability Group | Roles | Permissions |
+|---|---|---|
+| Manage Festival Content (workshops, events) | Administrator, Editor | Edit/publish/delete workshops & events, manage categories/taxonomies |
+| Manage Vendor Spots | Administrator | Create/edit spots, set prices, toggle availability |
+| View Registrations | Administrator | See workshop/event/spot registrations and payment status |
+| Submit Vendor Signup (frontend) | Anonymous/Public | Access vendor signup form |
+| Register for Workshops (frontend) | Anonymous/Public | Access workshop registration form + payment |
+
+Roles are managed by default WordPress capabilities. No custom roles needed for Phase 1.
+
 ### Constraints
 - Must work in **browser-based WordPress Playground** (no `exec`, limited server access)
 - Self-hosted fonts required (Playground may have no external network without `features.networking`)
@@ -518,7 +651,7 @@ Both spot types use the **same reservation system** (interactive map + spot sele
 
 ---
 
-## 10. Implementation Phases
+## 11. Implementation Phases
 
 ### Phase 0 — Foundation (docs)
 - [x] Create repo file structure (`themes/khf/`, `content/`, repo root)
@@ -577,7 +710,7 @@ Both spot types use the **same reservation system** (interactive map + spot sele
 
 ---
 
-## 11. Acceptance Criteria
+## 12. Acceptance Criteria
 
 | # | Criterion | How Verified |
 |---|---|---|
@@ -603,7 +736,7 @@ Both spot types use the **same reservation system** (interactive map + spot sele
 
 ---
 
-## 12. References
+## 13. References
 
 - Live site: https://kinzuaheritage.org/
 - Creadev.org (maintaining agency): https://creadev.org/
