@@ -18,6 +18,13 @@
   },
   "steps": [
     {
+      "step": "runWpInstallationWizard",
+      "options": {
+        "adminUsername": "admin",
+        "adminPassword": "password"
+      }
+    },
+    {
       "step": "installTheme",
       "themeData": {
         "resource": "bundled",
