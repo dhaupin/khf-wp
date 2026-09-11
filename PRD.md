@@ -468,6 +468,47 @@ Once ready, the theme+blueprint can be loaded via:
 - **Festival gate-admission ticketing** — the festival uses physical attendance ($5 at the gate, children free). A full event-ticketing platform is out of scope. *(This is distinct from the in-scope workshop/class payment flow and vendor signup payment, which use a lightweight checkout — Stripe/WP Simple Pay — not a full ticket inventory system.)*
 - **Vendor site-reservation map system** — the advanced feature of letting vendors pay to reserve a numbered site on an interactive grounds map is **Phase 2**. Phase 1 delivers the basic signup + payment form; Phase 2 adds the interactive reservation grid tied to a map layout.
 
+#### Venue Reservation Map System (Phase 2 — Detailed Specification)
+
+The venue reservation system is a **campground-style interactive map** where individual festival grounds spots are overlaid as clickable markers. Each spot can be selected to reveal an info panel with a photo, description, and a reserve option. The system supports two distinct spot types that share the same underlying reservation infrastructure:
+
+**Spot Types:**
+
+| Type | Location | Purpose |
+|---|---|---|
+| **Camper Spots** | Outside the festival grounds | For attendees camping at the festival |
+| **Vendor Spots** | Within the festival grounds | For artisans, vendors, and performers |
+
+Both spot types use the **same reservation system** (interactive map + spot selection + reservation flow), differentiated by a `spot_type` field (camper / vendor). The reservation flow handles availability checks, pricing, and payment processing uniformly regardless of spot type.
+
+**Map Interface:**
+- Spots are rendered as overlaid markers on an interactive map of the festival grounds.
+- Clicking a spot opens a popup/info panel showing:
+  - Spot photo/illustration
+  - Spot number/identifier
+  - Description (size, amenities, location notes)
+  - Availability status
+  - "Reserve" button (or "Unavailable" if already booked)
+- The map supports pan, zoom, and filtering by spot type (camper / vendor / all).
+
+**Reservation Flow:**
+1. User selects a spot on the map.
+2. Info panel displays spot details.
+3. User clicks "Reserve" → prompted for dates and attendee count.
+4. System checks availability and calculates pricing.
+5. User proceeds to payment (Stripe / WP Simple Pay).
+6. Confirmation + email receipt.
+
+**Integration with Vendor Registration (Phase 1):**
+- The Phase 1 vendor registration form (basic signup + payment) collects vendor contact details and initial payment.
+- On successful Phase 1 registration, the vendor is flagged as "eligible for site reservation" and can proceed to the map-based reservation system in Phase 2 to select a specific vendor spot.
+- The Phase 1 signup thus acts as a prerequisite/queue for the Phase 2 site reservation, with payment status carried forward.
+
+**Technical Notes:**
+- The map can be implemented using an open-source mapping library (e.g., Leaflet.js with OpenStreetMap tiles) to avoid external API dependencies in Playground.
+- Spots are stored as a custom post type (`spot`) with `spot_type` taxonomy (camper, vendor), location coordinates, photo, description, price, and availability metadata.
+- The interactive map frontend is vanilla JS, enqueued via `functions.php`.
+
 ### Constraints
 - Must work in **browser-based WordPress Playground** (no `exec`, limited server access)
 - Self-hosted fonts required (Playground may have no external network without `features.networking`)
