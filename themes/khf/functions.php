@@ -43,7 +43,8 @@ add_action( 'after_setup_theme', 'khf_editor_styles' );
 function khf_assets() {
 	$font_uri = get_theme_file_uri( 'assets/css/blocks.css' );
 	wp_enqueue_style( 'khf-blocks', $font_uri, array(), KHF_VERSION, 'all' );
-	wp_enqueue_script( 'khf-main', get_theme_file_uri( 'assets/js/mobile-menu.js' ), array(), KHF_VERSION, true );
+	wp_enqueue_script( 'khf-mobile-menu', get_theme_file_uri( 'assets/js/mobile-menu.js' ), array(), KHF_VERSION, true );
+	wp_enqueue_script( 'khf-workshop-registration', get_theme_file_uri( 'assets/js/workshop-registration.js' ), array(), KHF_VERSION, true );
 }
 add_action( 'wp_enqueue_scripts', 'khf_assets' );
 
@@ -82,6 +83,12 @@ function khf_register_block_styles() {
 		'label'       => __( 'Eagle Feather', 'khf' ),
 		'isDefault'   => false,
 		'className'   => 'is-style-eagle-feather',
+	) );
+	register_block_style( 'core/group', array(
+		'name'        => 'tree-of-peace-divider',
+		'label'       => __( 'Tree of Peace Divider', 'khf' ),
+		'isDefault'   => false,
+		'className'   => 'is-style-tree-of-peace-divider',
 	) );
 }
 add_action( 'init', 'khf_register_block_styles' );

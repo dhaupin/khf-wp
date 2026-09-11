@@ -1,5 +1,5 @@
 .edit-post-layout .editor-styles-wrapper {
-  background-color: #f5f5f5;
+  background-color: var(--wp--preset--color--text-light, #f5f5f5);
 }
 
 .editor-styles-wrapper {
@@ -9,7 +9,7 @@
 
 .editor-styles-wrapper .components-block-filter-group .is-style-seneca-filled::before,
 .editor-styles-wrapper [data-block][data-block-type="core/button"].is-style-seneca-filled {
-  background-color: #5a2a83;
+  background-color: var(--wp--preset--color--seneca-purple, #7a3b9e);
   color: var(--wp--preset--color--wampum-white, #ffffff);
 }
 
@@ -25,7 +25,7 @@
 }
 
 .editor-styles-wrapper .is-style-seneca-filled {
-  background-color: #5a2a83;
+  background-color: var(--wp--preset--color--seneca-purple, #7a3b9e);
   color: var(--wp--preset--color--wampum-white, #ffffff);
 }
 

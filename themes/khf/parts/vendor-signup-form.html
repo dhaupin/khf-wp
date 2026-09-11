@@ -25,40 +25,52 @@
 		<h3>Business Information</h3>
 		<!-- /wp:heading -->
 
-		<!-- wp:paragraph -->
-		<p><label for="khf_vendor_name"><strong>Vendor/Business Name</strong> <span style="color:#7a3b9e">*</span></label></p>
-		<!-- /wp:paragraph -->
-		<!-- wp:paragraph -->
-		<p><input type="text" id="khf_vendor_name" name="vendor_name" required style="width:100%;padding:0.75rem;border:1px solid #4a3a2a;border-radius:0.5rem;" /></p>
-		<!-- /wp:paragraph -->
+		<!-- wp:columns -->
+		<div class="wp-block-columns">
+			<!-- wp:column -->
+			<div class="wp-block-column">
+				<!-- wp:paragraph -->
+				<p><label for="khf_vendor_name"><strong>Vendor/Business Name</strong> <span style="color:#7a3b9e">*</span></label></p>
+				<!-- /wp:paragraph -->
+				<!-- wp:input {"type":"text","id":"khf_vendor_name","name":"vendor_name","required":true,"__nextHasNoMarginBottom":true} /-->
+			</div>
+			<!-- /wp:column -->
+			<!-- wp:column -->
+			<div class="wp-block-column">
+				<!-- wp:paragraph -->
+				<p><label for="khf_contact_name"><strong>Contact Name</strong> <span style="color:#7a3b9e">*</span></label></p>
+				<!-- /wp:paragraph -->
+				<!-- wp:input {"type":"text","id":"khf_contact_name","name":"contact_name","required":true,"__nextHasNoMarginBottom":true} /-->
+			</div>
+			<!-- /wp:column -->
+		</div>
+		<!-- /wp:columns -->
 
-		<!-- wp:paragraph -->
-		<p><label for="khf_contact_name"><strong>Contact Name</strong> <span style="color:#7a3b9e">*</span></label></p>
-		<!-- /wp:paragraph -->
-		<!-- wp:paragraph -->
-		<p><input type="text" id="khf_contact_name" name="contact_name" required style="width:100%;padding:0.75rem;border:1px solid #4a3a2a;border-radius:0.5rem;" /></p>
-		<!-- /wp:paragraph -->
-
-		<!-- wp:paragraph -->
-		<p><label for="khf_vendor_email"><strong>Email</strong> <span style="color:#7a3b9e">*</span></label></p>
-		<!-- /wp:paragraph -->
-		<!-- wp:paragraph -->
-		<p><input type="email" id="khf_vendor_email" name="vendor_email" required style="width:100%;padding:0.75rem;border:1px solid #4a3a2a;border-radius:0.5rem;" /></p>
-		<!-- /wp:paragraph -->
-
-		<!-- wp:paragraph -->
-		<p><label for="khf_vendor_phone"><strong>Phone</strong> <span style="color:#7a3b9e">*</span></label></p>
-		<!-- /wp:paragraph -->
-		<!-- wp:paragraph -->
-		<p><input type="tel" id="khf_vendor_phone" name="vendor_phone" required style="width:100%;padding:0.75rem;border:1px solid #4a3a2a;border-radius:0.5rem;" /></p>
-		<!-- /wp:paragraph -->
+		<!-- wp:columns -->
+		<div class="wp-block-columns">
+			<!-- wp:column -->
+			<div class="wp-block-column">
+				<!-- wp:paragraph -->
+				<p><label for="khf_vendor_email"><strong>Email</strong> <span style="color:#7a3b9e">*</span></label></p>
+				<!-- /wp:paragraph -->
+				<!-- wp:input {"type":"email","id":"khf_vendor_email","name":"vendor_email","required":true,"__nextHasNoMarginBottom":true} /-->
+			</div>
+			<!-- /wp:column -->
+			<!-- wp:column -->
+			<div class="wp-block-column">
+				<!-- wp:paragraph -->
+				<p><label for="khf_vendor_phone"><strong>Phone</strong> <span style="color:#7a3b9e">*</span></label></p>
+				<!-- /wp:paragraph -->
+				<!-- wp:input {"type":"tel","id":"khf_vendor_phone","name":"vendor_phone","required":true,"__nextHasNoMarginBottom":true} /-->
+			</div>
+			<!-- /wp:column -->
+		</div>
+		<!-- /wp:columns -->
 
 		<!-- wp:paragraph -->
 		<p><label for="khf_vendor_website"><strong>Website/Social Media</strong></label></p>
 		<!-- /wp:paragraph -->
-		<!-- wp:paragraph -->
-		<p><input type="url" id="khf_vendor_website" name="vendor_website" placeholder="https://" style="width:100%;padding:0.75rem;border:1px solid #4a3a2a;border-radius:0.5rem;" /></p>
-		<!-- /wp:paragraph -->
+		<!-- wp:input {"type":"url","id":"khf_vendor_website","name":"vendor_website","placeholder":"https://","__nextHasNoMarginBottom":true} /-->
 
 		<!-- wp:spacer {"height":"1.5rem"} -->
 		<div style="height:1.5rem" aria-hidden="true"></div>
@@ -68,15 +80,19 @@
 		<h3>Booth Preference</h3>
 		<!-- /wp:heading -->
 
-		<!-- wp:paragraph -->
-		<p><label><input type="radio" name="booth_size" value="10x10" checked /> 10x10 Standard</label></p>
-		<!-- /wp:paragraph -->
-		<!-- wp:paragraph -->
-		<p><label><input type="radio" name="booth_size" value="10x20" /> 10x20 Double</label></p>
-		<!-- /wp:paragraph -->
-		<!-- wp:paragraph -->
-		<p><label><input type="radio" name="booth_size" value="corner" /> Corner Upgrade</label></p>
-		<!-- /wp:paragraph -->
+		<!-- wp:group {"style":{"spacing":{"blockGap":"0.75rem"}}} -->
+		<div class="wp-block-group">
+			<!-- wp:paragraph -->
+			<p><label><input type="radio" name="booth_size" value="10x10" checked /> 10x10 Standard</label></p>
+			<!-- /wp:paragraph -->
+			<!-- wp:paragraph -->
+			<p><label><input type="radio" name="booth_size" value="10x20" /> 10x20 Double</label></p>
+			<!-- /wp:paragraph -->
+			<!-- wp:paragraph -->
+			<p><label><input type="radio" name="booth_size" value="corner" /> Corner Upgrade</label></p>
+			<!-- /wp:paragraph -->
+		</div>
+		<!-- /wp:group -->
 
 		<!-- wp:spacer {"height":"1.5rem"} -->
 		<div style="height:1.5rem" aria-hidden="true"></div>
@@ -86,24 +102,28 @@
 		<h3>Product Categories</h3>
 		<!-- /wp:heading -->
 
-		<!-- wp:paragraph -->
-		<p><label><input type="checkbox" name="categories[]" value="jewelry" /> Handmade Jewelry</label></p>
-		<!-- /wp:paragraph -->
-		<!-- wp:paragraph -->
-		<p><label><input type="checkbox" name="categories[]" value="pottery" /> Pottery & Ceramics</label></p>
-		<!-- /wp:paragraph -->
-		<!-- wp:paragraph -->
-		<p><label><input type="checkbox" name="categories[]" value="textiles" /> Textiles & Fiber</label></p>
-		<!-- /wp:paragraph -->
-		<!-- wp:paragraph -->
-		<p><label><input type="checkbox" name="categories[]" value="edibles" /> Edibles & Beverages</label></p>
-		<!-- /wp:paragraph -->
-		<!-- wp:paragraph -->
-		<p><label><input type="checkbox" name="categories[]" value="wood" /> Wood & Crafts</label></p>
-		<!-- /wp:paragraph -->
-		<!-- wp:paragraph -->
-		<p><label><input type="checkbox" name="categories[]" value="other" /> Other</label></p>
-		<!-- /wp:paragraph -->
+		<!-- wp:group {"style":{"spacing":{"blockGap":"0.5rem"}}} -->
+		<div class="wp-block-group">
+			<!-- wp:paragraph -->
+			<p><label><input type="checkbox" name="categories[]" value="jewelry" /> Handmade Jewelry</label></p>
+			<!-- /wp:paragraph -->
+			<!-- wp:paragraph -->
+			<p><label><input type="checkbox" name="categories[]" value="pottery" /> Pottery & Ceramics</label></p>
+			<!-- /wp:paragraph -->
+			<!-- wp:paragraph -->
+			<p><label><input type="checkbox" name="categories[]" value="textiles" /> Textiles & Fiber</label></p>
+			<!-- /wp:paragraph -->
+			<!-- wp:paragraph -->
+			<p><label><input type="checkbox" name="categories[]" value="edibles" /> Edibles & Beverages</label></p>
+			<!-- /wp:paragraph -->
+			<!-- wp:paragraph -->
+			<p><label><input type="checkbox" name="categories[]" value="wood" /> Wood & Crafts</label></p>
+			<!-- /wp:paragraph -->
+			<!-- wp:paragraph -->
+			<p><label><input type="checkbox" name="categories[]" value="other" /> Other</label></p>
+			<!-- /wp:paragraph -->
+		</div>
+		<!-- /wp:group -->
 
 		<!-- wp:spacer {"height":"1.5rem"} -->
 		<div style="height:1.5rem" aria-hidden="true"></div>
@@ -117,7 +137,7 @@
 		<p><label for="khf_vendor_comments"><strong>Questions/Comments</strong></label></p>
 		<!-- /wp:paragraph -->
 		<!-- wp:paragraph -->
-		<p><textarea id="khf_vendor_comments" name="vendor_comments" rows="4" style="width:100%;padding:0.75rem;border:1px solid #4a3a2a;border-radius:0.5rem;"></textarea></p>
+		<p><textarea id="khf_vendor_comments" name="vendor_comments" rows="4"></textarea></p>
 		<!-- /wp:paragraph -->
 
 		<!-- wp:spacer {"height":"1.5rem"} -->
