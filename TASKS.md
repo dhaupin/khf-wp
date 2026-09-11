@@ -92,13 +92,22 @@ Task IDs map to phases in `PRD.md`. Phase 0 = Foundation (docs) — completed.
 | 7.5 | **Event CPT meta box**: Start/End DateTime, All Day, Venue, Location, Featured Image, Registration URL | pending |
 | 7.6 | **Venue/Spot CPT** (Phase 2 — not in scope for Phase 1) | pending |
 
-## Phase 8 — Polish & Launch
+## Phase 8 — Theme Cleanup, Modernization, Polish
 | ID | Task | Status |
 |---|---|---|
-| 8.1 | Full acceptance check vs PRD §12 criteria | pending |
-| 8.2 | End-to-end Playground test (theme + all content + forms) | pending |
-| 8.3 | Finalize README build/test commands | completed |
-| 8.4 | Tag release; prep handoff to Creadev.org | pending |
+| 8.1 | Accessibility audit for older users (min 16px body text, WCAG AA contrast, focus indicators, reduced-motion) | pending |
+| 8.2 | Typography hierarchy review (H1–H3 distinction, line-height, max-width consistency across templates) | pending |
+| 8.3 | Color contrast validation across all templates, blocks, and pattern backgrounds | pending |
+| 8.4 | Spacing consistency enforcement (`theme.json` padding/margin scales) | pending |
+| 8.5 | Button/link sizing consistency (min 44×44px touch targets) | pending |
+| 8.6 | Review and consolidate duplicate or unused CSS rules (`blocks.css`, template parts) | pending |
+| 8.7 | Ensure consistent heading structure across all template parts and inner page templates | pending |
+| 8.8 | Keyboard navigation and screen-reader form testing for all interactive forms | pending |
+| 8.9 | Validate ARIA labels on navigation, forms, and interactive elements | pending |
+| 8.10 | Final visual polish pass (alignment, overflow, responsive breakpoints, image aspect ratios) | pending |
+| 8.11 | Cross-browser compatibility check (Chrome, Firefox, Safari, Edge) | pending |
+| 8.12 | Performance audit (font loading strategy, unused assets, lazy-loading images) | pending |
+| 8.13 | Code hygiene pass (remove debug code, clean up template parts) | pending |
 
 ## Validation / Acceptance Criteria
 - [x] Theme activates in WP with no PHP errors (verified live WP 7.1, HTTP 200)

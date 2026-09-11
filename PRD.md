@@ -706,6 +706,21 @@ Roles are managed by default WordPress capabilities. No custom roles needed for 
 - [ ] Documentation in `README.md` for loading in Playground + feature list
 - [ ] Tag release; prep live deployment handoff to Creadev.org
 
+### Phase 8 — Theme Cleanup, Modernization, Polish
+- [ ] Accessibility audit for older users: minimum 16px body text, high-contrast ratios (WCAG AA), visible focus indicators, reduced-motion support
+- [ ] Typography hierarchy review: clear visual distinction between H1–H3, body, and captions; consistent line-height and max-width across templates
+- [ ] Color contrast validation across all templates, blocks, and pattern backgrounds
+- [ ] Spacing consistency: enforce padding/margin scales defined in `theme.json` tokens
+- [ ] Button and link sizing consistency (minimum 44×44px touch targets)
+- [ ] Review and consolidate duplicate or unused CSS rules in `blocks.css` and template parts
+- [ ] Ensure consistent heading structure across all template parts and inner page templates
+- [ ] Keyboard navigation and screen-reader form testing for all interactive forms
+- [ ] Validate ARIA labels on navigation menus, forms, and interactive elements
+- [ ] Final visual polish pass: alignment, overflow, responsive breakpoints, image aspect ratios
+- [ ] Cross-browser compatibility check (Chrome, Firefox, Safari, Edge)
+- [ ] Performance audit: font loading strategy, unused asset removal, lazy-loading images
+- [ ] Code hygiene: remove debug code, verify comments, clean up template parts
+
 > **Note on dynamic features & Playground:** Form/payment functionality that requires external gateways (Stripe) will require `features.networking: true` in the Blueprint for live testing; locally-only tests will use sandbox/dry-run mode. The core theme + content + static pages work fully offline.
 
 ---
