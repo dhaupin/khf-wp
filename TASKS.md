@@ -109,6 +109,20 @@ Task IDs map to phases in `PRD.md`. Phase 0 = Foundation (docs) — completed.
 | 8.12 | Performance audit (font loading strategy, unused assets, lazy-loading images) | pending |
 | 8.13 | Code hygiene pass (remove debug code, clean up template parts) | pending |
 
+## Phase 9 — Content Curation, SEO, Media Strategy, and Glossary
+| ID | Task | Status |
+|---|---|---|
+| 9.1 | **Content audit & expansion** — Replace placeholder content in WXR with curated copy for all 8 pages; create 6–8 workshop CPT posts (blacksmithing, basket making, bead work, etc.) with dates, slots, instructors; populate `event` CPT with festival days, workshop days, venue blocks | pending |
+| 9.2 | **Dynamic content migration** — Convert `artisans.html`, `schedule.html`, `vendor-cta.html` static content to dynamic CPT queries where appropriate; keep design intact | pending |
+| 9.3 | **SEO meta implementation** — Add per-page `title`, `description`, `canonical` via `wp_head` in `functions.php`; verify all pages output correct tags | pending |
+| 9.4 | **Schema.org structured data** — Implement Organization (site-wide), Event (festival/workshop/event pages), BreadcrumbList (inner pages), WebSite (homepage) JSON-LD; validate with Rich Results Test | pending |
+| 9.5 | **OpenGraph / Twitter Card tags** — Add `og:`, `twitter:` meta for all page types (website, event, article); include `og:image` fallback to hero gradient | pending |
+| 9.6 | **SEO brief & keyword map** — Document tactical keyword targeting (heritage festival PA, Seneca native events, crafts festival Russell PA, venue rental PA, workshop keywords) with page assignments | pending |
+| 9.7 | **Media optimization & asset creation** — Generate WebP hero images + fallbacks; create favicon set (ICO, PNG, WebP, manifest); add `longhouse-silhouette.svg` pattern; optimize all SVGs; verify alt text conventions (informative vs decorative) | pending |
+| 9.8 | **Glossary page & cultural context** — Create `page-glossary.html` template + WXR content with all defined terms (wampum, Seneca, Haudenosaunee, Tree of Peace, Longhouse, eagle feather, basketry, woodworking); add footer widget "About This Festival" with 3–4 key terms linking to glossary; implement CSS-only tooltips on first-use terms | pending |
+| 9.9 | **Content prioritization & fallback verification** — Verify critical CSS inlining, hero gradient fallback, system font stack fallback, SVG inline patterns, forms work without JS; test low-bandwidth simulation | pending |
+| 9.10 | **Full content QA pass** — Tone consistency check (rustic, welcoming, bazaar-like); cultural sensitivity review (respectful framing, no stereotypes, attribution links to sni.org/senecamuseum.org); verify all CTAs flow correctly (hero → about → artisans → schedule → visit → CTAs) | pending |
+
 ## Validation / Acceptance Criteria
 - [x] Theme activates in WP with no PHP errors (verified live WP 7.1, HTTP 200)
 - [x] Seneca purple (`#7a3b9e`) appears on links/buttons/borders

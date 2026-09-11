@@ -723,6 +723,154 @@ Roles are managed by default WordPress capabilities. No custom roles needed for 
 
 > **Note on dynamic features & Playground:** Form/payment functionality that requires external gateways (Stripe) will require `features.networking: true` in the Blueprint for live testing; locally-only tests will use sandbox/dry-run mode. The core theme + content + static pages work fully offline.
 
+### Phase 9 — Content Curation, SEO, Media Strategy, and Glossary
+
+#### 9.1 Content Curation & Structure
+
+**Existing Content Audit:** The curated WXR currently contains 8 pages (front-page, workshop, events, venue, contact, vendor-signup, privacy, terms) and 1 workshop CPT post, plus the main navigation menu. This captures the core site structure but uses placeholder content in several sections.
+
+**Content Expansion Plan:**
+- **Additional workshop posts**: Create 6–8 workshop CPT posts representing actual classes (blacksmithing, wire weaving/wrapping, traditional basket making, bead work, gardening, plants/herbs, woodworking, leather craft). Each post needs date, time, max slots (8–12), instructor name, and description.
+- **Event posts**: Populate the `event` CPT with festival days (Aug 21–23, 2026), workshop days, and venue rental availability blocks.
+- **Dynamic content sections**: Replace static template-part content in `artisans.html`, `schedule.html`, `vendor-cta.html` with dynamic queries (CPT loops) where appropriate, while keeping the design intact.
+
+**Content Tone & Voice:** Rustic, welcoming, bazaar-like — conversational but grounded. Language should feel handcrafted: "Join us in the wooded glen," "Artisans gathering from across the region," "Hands-on classes with master craftspeople." Avoid corporate or overly polished phrasing. Seneca/Native elements are presented with reverence and context, never as decoration.
+
+**Content Bucket Mapping (from PRD §5):**
+
+| PRD §5 Content Bucket | Theme Location | Curation Notes |
+|---|---|---|
+| Hero / event dates + CTA | `parts/hero.html` | Fixed dates; update annually |
+| Mission ("What Is KHF") | `parts/about.html` | Core identity — preserve verbatim |
+| ARTS, MUSIC & MORE | `parts/artisans.html` | Convert to dynamic artisan/vendor grid from CPT or taxonomy terms |
+| Music lineup | `parts/schedule.html` | Structured as schedule items; link to performer bios if available |
+| The Festival (schedule, stages, auction) | `parts/schedule.html` | Hourly blocks; charity auction callout |
+| Come Experience Kinzua (map, contact, admission) | `parts/visit.html` | Embedded map + static contact/admission |
+| Vendor CTA (PDF + signup) | `parts/vendor-cta.html` | PDF download + form link |
+| Charity auction beneficiary | `parts/donate-auction.html` | Annual update (DAV Post 175, Faith Keepers School) |
+
+---
+
+#### 9.2 SEO Strategy
+
+**Meta Tags (per page):**
+- `title`: Page-specific, branded (`Kinzua Heritage Festival — 2026 Dates, Workshops & Artisans`)
+- `description`: 150–160 chars, action-oriented, includes primary keywords
+- `canonical`: Absolute URL
+
+**Schema.org Structured Data (JSON-LD):**
+| Type | Pages | Key Properties |
+|---|---|---|
+| `Organization` | Homepage, all pages | `name`, `url`, `logo`, `sameAs` (Facebook), `address`, `telephone`, `email` |
+| `Event` | Festival days, workshop days, `single-event.html`, events listing | `name`, `startDate`, `endDate`, `eventAttendanceMode`, `eventStatus`, `location` (Place), `offers` (price), `performer`, `description` |
+| `BreadcrumbList` | All inner pages | Hierarchical navigation trail |
+| `WebSite` | Homepage | `name`, `url`, `potentialAction` (SearchAction) |
+
+**OpenGraph / Twitter Card:**
+- `og:type`: `website` (homepage), `event` (event pages), `article` (blog/workshop posts)
+- `og:title`, `og:description`, `og:image` (hero image or fallback), `og:url`
+- `twitter:card`: `summary_large_image`
+- Include `og:site_name`: "Kinzua Heritage Festival"
+
+**Output Location:**
+- All meta tags and JSON-LD emitted via `wp_head` hooks in `functions.php`
+- Template-specific JSON-LD (e.g., `Event` on single event) via template parts or `get_template_part` with conditional logic
+
+**Target Keywords (primary → secondary):**
+1. `heritage festival Pennsylvania`
+2. `Seneca native events Pennsylvania`
+3. `crafts festival Russell PA`
+4. `venue rental Pennsylvania`
+5. `blacksmithing workshop PA`
+6. `basket making class Pennsylvania`
+7. `family festival Warren County PA`
+8. `Native American music festival PA`
+
+**Technical SEO:**
+- XML sitemap (all public pages + CPT archives)
+- `robots.txt` allowing all, disallowing `/wp-admin/`, `/wp-login.php`
+- Clean permalinks (`/workshop/blacksmithing-basics/`, `/event/festival-day-1/`)
+- Lazy-loading images (native WP 5.5+)
+
+---
+
+#### 9.3 Media Strategy & Optimization
+
+**Required Media Assets:**
+
+| Asset | Spec | Location | Notes |
+|---|---|---|---|
+| Hero images (2) | 1920×1080 WebP + JPG fallback, wooded glen + artisan close-ups | `assets/images/` | Compressed ≤200KB; descriptive alt text |
+| Logo variants | `logo.svg` (primary), `logo-white.svg`, `logo-purple.svg` | `assets/images/` | SVG for crisp scaling; dark/light mode ready |
+| Favicon set | 16, 32, 48, 180, 192, 512 px (ICO + PNG + WebP) | `assets/images/favicons/` | Generated from logo; includes `site.webmanifest` |
+| Vendor application PDF | `KHF-App-2026-2.pdf` | `assets/images/` | Keep current version; link from vendor CTA |
+| SVG patterns (4 existing) | `wampum-border.svg`, `tree-of-peace-divider.svg`, `eagle-feather.svg`, `sky-world-arch.svg` | `assets/images/patterns/` | Optimized, viewBox set, no inline styles |
+| Additional pattern: `longhouse-silhouette.svg` | Subtle divider for sections | `assets/images/patterns/` | New — inspired by longhouse roofline |
+| Artisan/vendor photos | 800×600 WebP, per category | `assets/images/artisans/` | Placeholder set for WXR import |
+
+**Image Alt Text Conventions:**
+- **Informative** (content images): Descriptive, concise, include cultural context where relevant. Example: `"Master blacksmith demonstrating traditional forging at Kinzua Heritage Festival"` not `"Image of blacksmith"`
+- **Decorative** (patterns, dividers, purely aesthetic): `alt=""` (empty) + `role="presentation"` or CSS background
+- **Functional** (CTA icons, navigation): Describe function: `"Download vendor application PDF"`
+
+**Accessibility:**
+- All images have explicit `width`/`height` attributes (no layout shift)
+- SVGs used inline or as `<img>` with `aria-hidden="true"` if decorative
+- Color contrast on text-over-image verified (WCAG AA)
+
+**File Naming Convention:**
+- `kebab-case` for all files: `hero-wooded-glen.webp`, `logo-white.svg`, `vendor-application-2026.pdf`
+- Pattern SVGs: `pattern-{name}.svg` prefix for clarity
+
+---
+
+#### 9.4 Glossary & Cultural Context
+
+**Key Terms & Definitions (for visitor education):**
+
+| Term | Definition | Placement |
+|---|---|---|
+| **Wampum** | Sacred shell beads (quahog clam = purple, whelk = white) used by Haudenosaunee for record-keeping, treaties, and ceremony. Purple lines on belts symbolize the Two Row Wampum treaty — two vessels traveling side by side in peace. | Footer widget "About This Festival" + dedicated glossary page + tooltips on first use |
+| **Seneca / Onöndowa'ga:'** | "People of the Great Hill" — westernmost nation of the Haudenosaunee Confederacy. Traditional territory includes the Kinzua Valley. | Footer widget, glossary page |
+| **Haudenosaunee** | "People of the Longhouse" — the Six Nations Confederacy (Mohawk, Oneida, Onondaga, Cayuga, Seneca, Tuscarora). Governed by the Great Law of Peace. | Glossary page |
+| **Tree of Peace** | Eastern White Pine — symbol of the Great Law. Roots spread in four directions (north, south, east, west) inviting all nations to follow peace. Eagle sits atop as messenger to the Creator. | Tooltip on SVG pattern, glossary page |
+| **Longhouse** | Traditional communal dwelling; symbol of the Confederacy territory where all families live as one. | Glossary page, pattern tooltip |
+| **Eagle Feather** | Messenger to the Creator; honor symbol. Used respectfully in ceremonies, not as decoration. | Glossary page only (do not trivialize) |
+| **Basketry (Seneca)** | Black ash splint baskets — utilitarian and artistic; patterns encode family/identity. | Artisan section, glossary page |
+| **Woodworking / Bow Making** | Traditional crafts using local hardwoods; bow makers demonstrate self-bow construction. | Workshop descriptions, glossary page |
+
+**Placement Strategy:**
+1. **Footer widget** ("About This Festival") — 3–4 key terms with links to glossary
+2. **Dedicated glossary page** (`page-glossary.html` — new template) — full definitions, cultural context, pronunciation guides
+3. **Tooltips** — on first occurrence of terms in content (e.g., "wampum" in hero, "Tree of Peace" in pattern areas) via lightweight JS or CSS-only tooltip pattern
+
+**Respectful Framing Rules:**
+- Never use sacred terms as marketing slogans ("wampum savings!")
+- Always attribute: "Inspired by Haudenosaunee design traditions"
+- Link to Seneca Nation resources: `sni.org`, `senecamuseum.org`
+- No stereotypical imagery (feathers, headdresses, tipis — these are Plains cultures, not Haudenosaunee)
+
+---
+
+#### 9.5 Content Prioritization & User Journey Flow
+
+**Priority Order (Hero → Conversion):**
+
+1. **Hero** — Festival dates, tagline, primary CTAs ("Get Involved" → workshop/vendor, "Visit Kinzua" → location/admission)
+2. **About / Mission** — "What Is the Kinzua Heritage Festival" (identity, trust)
+3. **Artisans / Vendors** — "ARTS, MUSIC & MORE" (visual proof of experience)
+4. **Schedule / Music** — The Festival (stages, hourly shows, auction) — answers "what happens when"
+5. **Visit / Venue** — Location, map, contact, admission, venue rental inquiry
+6. **CTA Sections** — Vendor signup, Workshop registration, Donate/Auction support
+
+**Fallback Content Strategy (Low Bandwidth / Older Browsers):**
+- **Critical CSS inlined** in `<head>` (via `theme.json` + small `blocks.css` critical subset)
+- **Hero image**: CSS gradient fallback (`wooded-glen` gradient) if image fails; `loading="eager"` on hero
+- **Fonts**: System font stack fallback (`font-family: var(--wp--preset--font-family--display, Georgia, serif)`)
+- **SVG patterns**: Inline SVG with `width`/`height` — no external requests
+- **JavaScript**: Mobile menu only; all content accessible without JS
+- **Forms**: Progressive enhancement — native HTML form submission works without JS; JS adds validation/UX only
+
 ---
 
 ## 12. Acceptance Criteria
@@ -748,6 +896,11 @@ Roles are managed by default WordPress capabilities. No custom roles needed for 
 | 17 | OpenGraph + Twitter Card meta tags present | View page source; grep `og:` / `twitter:` |
 | 18 | Workshop CPT + slot-limited class selection | Admin can create classes; frontend enforces limit |
 | 19 | Sitemap + robots.txt generated | Visit `/sitemap.xml` and `/robots.txt` |
+| 20 | SEO meta tags (title, description, canonical) on all pages | View page source; verify presence |
+| 21 | Schema.org Organization, Event, BreadcrumbList JSON-LD | View page source; validate with Google Rich Results Test |
+| 22 | Glossary page exists with cultural terms | Page renders; definitions present |
+| 23 | Media optimized (WebP, alt text, lazy-loading) | Lighthouse audit; check image formats |
+| 24 | Content tone consistent (rustic, welcoming, bazaar-like) | Manual review across all pages |
 
 ---
 
@@ -766,4 +919,4 @@ Roles are managed by default WordPress capabilities. No custom roles needed for 
 
 ---
 
-*Document status: Approved for implementation. Last updated: 2026-09-09. Next review: upon Phase 3 completion.*
+*Document status: Approved for implementation. Last updated: 2026-09-11. Next review: upon Phase 9 completion.*
